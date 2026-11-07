@@ -61,10 +61,12 @@ JavaScript ES Modules, HTML e CSS, SVG e algoritmos puros, sem framework ou serv
 
 ## Verificação
 
-26 grupos de testes automatizados passaram. Cobrem milhares de palavras geradas: aceitação/rejeição, ε e ciclos, quantificadores, equivalência das conversões, minimização, pilha, Turing, Earley, validação de modelos, escape XML e integridade dos seis dicionários.
+30 grupos de testes automatizados passaram. Cobrem milhares de palavras geradas: aceitação/rejeição, ε e ciclos, quantificadores, equivalência das conversões, minimização, pilha, Turing, Earley, validação de modelos, escape XML e integridade dos seis dicionários.
 
 Verificações manuais no navegador: caso q1–q2–q3 com retorno q3→q1, agrupamento de rótulos, editar/excluir/adicionar rótulos, zoom, navegação, arraste com recálculo de curvas, desfazer, menus, modo expandido, animação e pausa; também foram verificadas na versão anterior: execução, rejeição, lote, alteração de nome de estado, desfazer, pilha com aceitação e rejeição, escrita em fita, conversão de gramática em pilha, importação de XML JFLAP e troca de idiomas. Os testes não equivalem a uma auditoria completa de acessibilidade, revisão linguística ou compatibilidade de todos os arquivos JFLAP.
 
 ## GitHub Pages
 
 O workflow `.github/workflows/pages.yml` executa os testes antes de publicar `dist` no GitHub Pages. Em Settings → Pages, a origem deve ser **GitHub Actions**. Commits na branch `main` atualizam o site automaticamente; pull requests executam apenas os testes. O site usa caminhos relativos para funcionar dentro de `/automata-lab/`.
+
+Quando uma cadeia é rejeitada por falta de transição, o último conjunto de estados alcançado é exibido em vermelho como indicação do ponto de falha, inclusive se contiver estados de aceitação. Esses marcadores não representam configurações ainda ativas. Antes do término, a simulação mantém o destaque normal de execução.

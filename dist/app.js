@@ -1,3 +1,4 @@
+import {stateHighlights} from './editor-simulation.js';
 import {groupTransitions,routeTransition,zoomCamera,fitCamera} from './editor-geometry.js';
 import{alphabet,validate,simulate,deterministic,determinize,minimize,earley,regexToNFA,example,equivalence,toGrammar,regularGrammarToFA,grammarToPDA,toRegex}from'./engine.js';
 import{importProject,jflap,download}from'./io.js';
@@ -31,7 +32,7 @@ function applyCamera(){
 function renderCanvas(){
  const c=$('canvas');c.replaceChildren();c.setAttribute('aria-label',t('editor'));applyCamera();
  const defs=svg('defs');for(const[id,color]of[['arrow','#8d87ab'],['arrow-active','#28a58b']]){const marker=svg('marker',{id,viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'});marker.append(svg('path',{d:'M 0 0 L 10 5 L 0 10 z',fill:color}));defs.append(marker)}c.append(defs);
- const rejectedAtEnd=result?.accepted===false&&frame===result.trace.length-1;
+ const highlight=stateHighlights(result,frame),rejectedAtEnd=highlight.rejected,highlighted=new Set(highlight.ids);
  const active=new Set(result?.trace?.[frame]?.active||[]),previous=new Set(result?.trace?.[frame-1]?.active||[]);
  routes=groupRoutes();for(const{group,lines,route}of routes){
   const isActive=frame>0&&previous.has(group.from)&&active.has(group.to)&&group.indexes.some(i=>{const e=model.edges[i];return model.type!=='fa'||!e.read||e.read===[...$('word').value][frame-1]});
@@ -45,8 +46,8 @@ function renderCanvas(){
  }
  for(const state of model.states){
   if(state.initial)c.append(svg('path',{d:`M ${state.x-82} ${state.y} L ${state.x-39} ${state.y}`,class:'initial-arrow','marker-end':'url(#arrow)'}));
-  const g=svg('g',{class:'state'+(selected===state.id?' selected':'')+(active.has(state.id)?' active'+(rejectedAtEnd?' rejected':''):'')+(source===state.id?' connecting':''),'data-id':state.id,tabindex:0,role:'button','aria-label':state.name+(active.has(state.id)&&rejectedAtEnd?' · '+t('rejected'):''),transform:`translate(${state.x} ${state.y})`});
-  if(active.has(state.id))g.append(svg('circle',{r:43,class:'state-halo','aria-hidden':'true'}));
+  const g=svg('g',{class:'state'+(selected===state.id?' selected':'')+(highlighted.has(state.id)?' active'+(rejectedAtEnd?' rejected':''):'')+(source===state.id?' connecting':''),'data-id':state.id,tabindex:0,role:'button','aria-label':state.name+(highlighted.has(state.id)&&rejectedAtEnd?' · '+t('rejected'):''),transform:`translate(${state.x} ${state.y})`});
+  if(highlighted.has(state.id))g.append(svg('circle',{r:43,class:'state-halo','aria-hidden':'true'}));
   g.append(svg('circle',{r:35}));if(state.final)g.append(svg('circle',{r:29}));g.append(svg('text',{'text-anchor':'middle','dominant-baseline':'central'},state.name.length>10?state.name.slice(0,10)+'…':state.name));
   g.onpointerdown=ev=>{
    ev.stopPropagation();if(ev.button===1||tool==='pan'||spaceHeld){startPan(ev);return}if(ev.button!==0)return;
