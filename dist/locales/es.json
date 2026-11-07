@@ -91,5 +91,7 @@
   "addTransition": "Añadir transición",
   "animate": "Animar",
   "pause": "Pausar",
-  "speed": "Velocidad de animación"
+  "speed": "Velocidad de animación",
+  "clearEditor": "Limpiar editor",
+  "clearEditorConfirm": "¿Eliminar todos los estados y transiciones de este diagrama? Puedes recuperarlos con Deshacer."
 }

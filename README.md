@@ -20,7 +20,7 @@ Publique a pasta `dist` em qualquer hospedagem estática. Não abra `index.html`
 - Menus junto ao elemento clicado: nome, estado inicial/final e exclusão de estados; edição, inclusão e exclusão individual de cada transição.
 - Uma seta por par de origem e destino, com rótulos agrupados. Curvas são recalculadas ao mover estados e procuram desviar de estados intermediários; sentidos opostos permanecem separados. Em diagramas muito densos, sobreposições entre curvas ou rótulos ainda podem exigir reorganização dos estados.
 - Animação com iniciar/pausar, velocidade ajustável, estados ativos e fluxo visual nas setas; controles rápidos dentro do editor expandido. Efeitos decorativos respeitam a preferência de movimento reduzido.
-- Organizar, desfazer e refazer até 60 alterações.
+- Organizar, desfazer e refazer até 60 alterações. Criar um estado não abre seu menu automaticamente. O botão Limpar editor remove estados e transições após confirmação; a limpeza pode ser revertida com Desfazer.
 - AFD e AFN com ε: simulação por conjuntos e fecho ε, execução passo a passo e testes em lote.
 - Autômatos com pilha não determinísticos: exploração de configurações, leitura/empilhamento/desempilhamento, pilha visível durante a execução.
 - Máquina de Turing não determinística de uma fita: fita esparsa, escrita e movimentos L/R/S; inspeção da fita durante os passos.

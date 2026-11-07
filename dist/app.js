@@ -71,7 +71,7 @@ $('canvas').onpointerup=ev=>{
 $('canvas').onpointercancel=()=>{if(drag){model=drag.old;drag=null}panning=null;$('canvas').classList.remove('panning');render()};
 $('canvas').onclick=ev=>{
  if(ev.target!==$('canvas')||tool!=='add')return;if(model.states.length>=150){toast('modelLimit');return}snapshot();const p=point(ev),id=crypto.randomUUID();
- model.states.push({id,name:'q'+model.states.length,x:p.x,y:p.y,initial:!model.states.length,final:false});selected=id;context={kind:'state',anchor:p};changed();
+ model.states.push({id,name:'q'+model.states.length,x:p.x,y:p.y,initial:!model.states.length,final:false});selected=id;context=null;changed();
 };
 function closeContext(clear=true){context=null;$('contextMenu').hidden=true;if(clear)selected=null}
 function positionContext(){
@@ -140,3 +140,11 @@ document.addEventListener('keyup',e=>{if(e.code==='Space'){spaceHeld=false;$('ca
 window.addEventListener('blur',()=>{spaceHeld=false;stopAnimation();$('canvas').classList.remove('space-pan')});
 
 $('quickAnimate').onclick=()=>$('animate').click();$('quickStep').onclick=()=>$('step').click();$('quickReset').onclick=()=>$('reset').click();$('quickWord').oninput=()=>{$('word').value=$('quickWord').value;$('word').oninput()};$('quickWord').onkeydown=e=>{if(e.key==='Enter')$('animate').click()};
+
+$('clearEditor').onclick=()=>{
+ const body=dialog('clearEditor'),message=el('p','',t('clearEditorConfirm')),actions=el('div','dialog-actions');
+ const cancel=el('button','',t('cancel')),confirm=el('button','primary',t('clearEditor'));
+ cancel.onclick=()=>$('dialog').close();
+ confirm.onclick=()=>{snapshot();model={type:model.type,states:[],edges:[]};selected=null;source=null;drag=null;tool='select';frame=0;camera={x:0,y:0,w:980,h:560};$('batchResults').replaceChildren();$('dialog').close();changed()};
+ actions.append(cancel,confirm);body.append(message,actions);cancel.focus();
+};

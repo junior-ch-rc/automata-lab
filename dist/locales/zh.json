@@ -91,5 +91,7 @@
   "addTransition": "添加转移",
   "animate": "动画模拟",
   "pause": "暂停",
-  "speed": "动画速度"
+  "speed": "动画速度",
+  "clearEditor": "清空编辑器",
+  "clearEditorConfirm": "删除此图的全部状态和转移？可通过撤销恢复。"
 }

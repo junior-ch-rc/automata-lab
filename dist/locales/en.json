@@ -91,5 +91,7 @@
   "addTransition": "Add transition",
   "animate": "Animate",
   "pause": "Pause",
-  "speed": "Animation speed"
+  "speed": "Animation speed",
+  "clearEditor": "Clear editor",
+  "clearEditorConfirm": "Remove all states and transitions from this diagram? You can restore them with Undo."
 }
