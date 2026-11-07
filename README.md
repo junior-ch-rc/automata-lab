@@ -16,7 +16,11 @@ Publique a pasta `dist` em qualquer hospedagem estática. Não abra `index.html`
 
 ## Recursos entregues
 
-- Editor SVG: criar, arrastar, conectar, renomear e remover estados; definir início e aceitação; editar/remover transições; organizar; desfazer/refazer até 60 alterações.
+- Editor SVG amplo, com modo expandido, zoom por botões ou roda do mouse, enquadramento e deslocamento pelo botão de navegação ou Espaço + arraste. Estados podem ser posicionados fora da área original.
+- Menus junto ao elemento clicado: nome, estado inicial/final e exclusão de estados; edição, inclusão e exclusão individual de cada transição.
+- Uma seta por par de origem e destino, com rótulos agrupados. Curvas são recalculadas ao mover estados e procuram desviar de estados intermediários; sentidos opostos permanecem separados. Em diagramas muito densos, sobreposições entre curvas ou rótulos ainda podem exigir reorganização dos estados.
+- Animação com iniciar/pausar, velocidade ajustável, estados ativos e fluxo visual nas setas; controles rápidos dentro do editor expandido. Efeitos decorativos respeitam a preferência de movimento reduzido.
+- Organizar, desfazer e refazer até 60 alterações.
 - AFD e AFN com ε: simulação por conjuntos e fecho ε, execução passo a passo e testes em lote.
 - Autômatos com pilha não determinísticos: exploração de configurações, leitura/empilhamento/desempilhamento, pilha visível durante a execução.
 - Máquina de Turing não determinística de uma fita: fita esparsa, escrita e movimentos L/R/S; inspeção da fita durante os passos.
@@ -53,13 +57,13 @@ Esta versão **não possui paridade integral com o JFLAP**. Não inclui transdut
 
 JavaScript ES Modules, HTML e CSS, SVG e algoritmos puros, sem framework ou servidor de aplicação. Essa escolha evita download de um framework e chamadas ao servidor a cada simulação. Não foi realizada comparação de desempenho entre tecnologias. O armazenamento usa localStorage: exporte JSON para backup e portabilidade. Não há sincronização entre dispositivos. Fontes externas são opcionais e têm fallback para fontes do sistema.
 
-`dist/engine.js`: algoritmos puros. `dist/io.js`: validação e arquivos. `dist/app.js`: interface. `dist/locales/*.json`: traduções com o mesmo conjunto de chaves. `tests/engine.test.js`: testes automatizados determinísticos.
+`dist/engine.js`: algoritmos puros. `dist/io.js`: validação e arquivos. `dist/app.js`: interface. `dist/locales/*.json`: traduções com o mesmo conjunto de chaves. `tests/engine.test.js`: testes dos algoritmos; `tests/editor.test.js`: agrupamento de transições, desvio de obstáculos, setas opostas, laços, zoom ancorado e enquadramento.
 
 ## Verificação
 
-19 grupos de testes automatizados passaram. Cobrem milhares de palavras geradas: aceitação/rejeição, ε e ciclos, quantificadores, equivalência das conversões, minimização, pilha, Turing, Earley, validação de modelos, escape XML e integridade dos seis dicionários.
+26 grupos de testes automatizados passaram. Cobrem milhares de palavras geradas: aceitação/rejeição, ε e ciclos, quantificadores, equivalência das conversões, minimização, pilha, Turing, Earley, validação de modelos, escape XML e integridade dos seis dicionários.
 
-Verificações manuais no navegador: execução, rejeição, lote, alteração de nome de estado, desfazer, pilha com aceitação e rejeição, escrita em fita, conversão de gramática em pilha, importação de XML JFLAP e troca de idiomas. Os testes não equivalem a uma auditoria completa de acessibilidade, revisão linguística ou compatibilidade de todos os arquivos JFLAP.
+Verificações manuais no navegador: caso q1–q2–q3 com retorno q3→q1, agrupamento de rótulos, editar/excluir/adicionar rótulos, zoom, navegação, arraste com recálculo de curvas, desfazer, menus, modo expandido, animação e pausa; também foram verificadas na versão anterior: execução, rejeição, lote, alteração de nome de estado, desfazer, pilha com aceitação e rejeição, escrita em fita, conversão de gramática em pilha, importação de XML JFLAP e troca de idiomas. Os testes não equivalem a uma auditoria completa de acessibilidade, revisão linguística ou compatibilidade de todos os arquivos JFLAP.
 
 ## GitHub Pages
 
